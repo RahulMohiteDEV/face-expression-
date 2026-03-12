@@ -1,8 +1,13 @@
 const userModel = require("../models/user.model");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const { get } = require("mongoose");
+const blacklistModel = require("../models/blacklist.model")
+const redis = require("../config/cache");
+
 
 async function registerUser(req, res) {
+     console.log(req.body);
     const { username, email, password } = req.body;
 
     const isuseralreadyexists = await userModel.findOne({
@@ -98,10 +103,36 @@ async function loginUser(req, res) {
 
 }
 
+async function getUser(req,res){
+
+     const User = await userModel.findById(req.user.id);
+
+     res.status(200).json({
+        message:"User fetched successfully",
+        User
+     })
+}
+
+async function logOutUser(req, res){
+
+    const token = req.cookies.token;
+
+    res.clearCookie("token");
+
+ await redis.set(token, Date.now().toString(), "EX", 60 * 60)
+
+    res.status(200).json({
+        message:"User logged out successfully"
+    })
+
+}
+
 
 
 module.exports = {
     registerUser,
-    loginUser
+    loginUser,
+    getUser,
+    logOutUser
 };
 

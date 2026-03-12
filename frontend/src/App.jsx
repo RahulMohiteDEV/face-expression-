@@ -1,18 +1,15 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import FaceExpressionDetector from './features/expression/components/FaceExpressionDetector'
+import { RouterProvider } from 'react-router-dom'
+import {router} from './app.routes' 
+import './features/shared/styles/global.scss'
+import { AuthProvider } from './features/auth/auth.context'
 
 function App() {
 
 
   return (
-    <>
-      <FaceExpressionDetector/>
-     
-    
-    </>
+           <AuthProvider>
+            <RouterProvider router={router} />
+           </AuthProvider>
   )
 }
 

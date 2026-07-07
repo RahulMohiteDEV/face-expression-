@@ -63,7 +63,7 @@ export async function detect({ videoRef, landmarkerRef, streamRef, setExpression
         const jawOpen = getScore("jawOpen");
 
         if (smileLeft > 0.5 && smileRight > 0.5) {
-          setExpression("😊 Smiling");
+          setExpression("😊 Happy");
         } else if (browDownLeft > 0.2 && browDownRight > 0.2) {
           setExpression("😠 Angry");
         } else if (jawOpen > 0.002) {
@@ -72,6 +72,5 @@ export async function detect({ videoRef, landmarkerRef, streamRef, setExpression
           setExpression("😐 Neutral");
         }
       }
-
       
     }

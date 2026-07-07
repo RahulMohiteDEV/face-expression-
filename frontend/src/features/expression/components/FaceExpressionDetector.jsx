@@ -42,7 +42,7 @@ export default function FaceExpressionDetector() {
         ref={videoRef}
         autoPlay
         playsInline
-        style={{ width: "400px", borderRadius: "10px" }}
+        
       />
       <h2>{expression}</h2>
       <button onClick={() => detect({ videoRef, landmarkerRef, animationFrameRef, streamRef, setExpression })}>Detect Expression</button>
